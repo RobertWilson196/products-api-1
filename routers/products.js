@@ -10,7 +10,7 @@ const productArrToObj = (arrayOfProducts) => {
     //for Each product in arrayOfProducts
     arrayOfProducts.forEach(product => {
         const id = product._id;
-        const copy = {...product}
+        const copy = {...product._doc}
         delete copy._id; 
         accumulator[id] = copy;
     });
@@ -22,9 +22,20 @@ const productArrToObj = (arrayOfProducts) => {
 }
 
 router.get('/products', (req, res) => {
-    res.status(200).json({
-        products: productArrToObj(mockProducts) 
-    });
+    Product
+        .find()
+        .exec()
+        .then( allProducts => {
+            res.status(200).json({
+                products: productArrToObj(allProducts) 
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "Something went wrong"
+            })
+        });
+    
 });
 
 router.get('/products/:id', (req, res) => {
