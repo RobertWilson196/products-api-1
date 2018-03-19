@@ -6,6 +6,7 @@ require('dotenv').config();
 
 //middleware
 const logger = require('./middleware/logger'); //morgan is better
+const err404 = require('./middleware/404');
 
 mongoose.connect(process.env.MONGO_URI);
 
@@ -21,9 +22,7 @@ serverApp.get('/', (req, res) => {
     res.send('Something better');
 });
 
-serverApp.use(function notFoundHandler(req, res, next){
-    res.status(404).send("Error 404: Sarcasm module has not been found.");
-});
+serverApp.use(err404);
 
 serverApp.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`);
