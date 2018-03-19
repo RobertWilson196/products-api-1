@@ -35,7 +35,6 @@ router.get('/products', (req, res) => {
                 msg: "Something went wrong"
             })
         });
-    
 });
 
 router.get('/products/:id', (req, res) => {
@@ -57,7 +56,6 @@ router.get('/products/:id', (req, res) => {
                 msg: "Something went wrong."
             });
         });
-
 });
 
 //post means create
@@ -67,7 +65,7 @@ router.post('/products', (req, res) => {
         price: 1000,
         imgSrc: 'https://via.placeholder.com/250x250',
     });
-    
+
     product
         .save()
         .then(response => {
@@ -80,8 +78,15 @@ router.post('/products', (req, res) => {
                 msg: "Something went wrong."
             });
         });
+});
 
-    
+//update (PUT)
+router.put('/products/:id', (req,res) => {
+    res.send('Updating...');
+});
+//delete (DELETE)
+router.delete('/products/:id', (req,res) => {
+    res.send('Deleting...');
 });
 
 module.exports = router; //like export default
