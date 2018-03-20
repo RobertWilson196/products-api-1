@@ -22,7 +22,12 @@ serverApp.get('/', (req, res) => {
     res.send('Something better');
 });
 
-serverApp.use(err404);
+serverApp.use(err404); //express docs to find out how to implement a custom url page
+serverApp.use(function serverErrorHandler(err, req, res, next){
+    res.status(500).json({
+        msg: "something went wrong"
+    });
+});
 
 serverApp.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`);
