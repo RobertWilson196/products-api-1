@@ -7,8 +7,14 @@ const productSchema = new Schema({
         required: true,
         type: String,
     },
-    imgSrc: String,
-    price: Number,
+    imgSrc: {
+        required: true,
+        type: String,
+    },
+    price: {
+        required: true,
+        type: Number,
+    },
     created: {
         required: true,
         type: Date,

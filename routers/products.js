@@ -76,8 +76,11 @@ router.put('/products/:id', (req, res, next) => {
     res.send('Updating...');
     const {id} = req.params;
     const update = {
-        name: "updated name"
+        name: req.body.name,
+        price: req.body.price,
+        imgSrc: req.body.imgSrc
     };
+    
     Product.findByIdAndUpdate(id, update)
         .then(response => {
             res.status(200).json({
