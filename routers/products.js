@@ -52,10 +52,13 @@ router.get('/products/:id', (req, res, next) => {
 
 //post means create
 router.post('/products', (req, res, next) => {
+    if(!req.body.name) {
+        next({msg: "bad request"});
+    };
     const product = new Product({
-        name: "something new",
-        price: 1000,
-        imgSrc: 'https://via.placeholder.com/250x250',
+        name: req.body.name,
+        price: req.body.price,
+        imgSrc: req.body.imgSrc
     });
 
     product
