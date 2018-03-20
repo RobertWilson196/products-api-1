@@ -52,7 +52,7 @@ router.get('/products/:id', (req, res, next) => {
 
 //post means create
 router.post('/products', (req, res, next) => {
-    if(!req.body.name) {
+    if(!req.body.name || req.body.name == '') {
         next({msg: "bad request"});
     };
     const product = new Product({
@@ -80,7 +80,7 @@ router.put('/products/:id', (req, res, next) => {
         price: req.body.price,
         imgSrc: req.body.imgSrc
     };
-    
+
     Product.findByIdAndUpdate(id, update)
         .then(response => {
             res.status(200).json({
