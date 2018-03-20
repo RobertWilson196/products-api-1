@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 //middleware
+const bodyParser = require('body-parser');
 const logger = require('./middleware/logger'); //morgan is better
 const err404 = require('./middleware/404');
 const serverError = require('./middleware/serverError');
@@ -16,6 +17,8 @@ const PORT = process.env.PORT || 5000; //necessary for Heroku deployment
 //routers
 const productRouter = require('./routers/products');
 
+serverApp.use(bodyParser.json());
+serverApp.use(bodyParser.urlencoded({extended: true}));
 serverApp.use(logger);
 serverApp.use(productRouter); //register the router with the application
 
